@@ -16,4 +16,4 @@ def execute_phylogenetic_tree(fileName, bootstrap):
 
 
 def generate_phylogenetic_tree(fileName, bootstrap):
-    subprocess.call(f"iqtree -s ./{fileName} -bb {bootstrap}")
+    subprocess.call(f"iqtree -s ./{fileName} -bb {bootstrap}", shell=True)
