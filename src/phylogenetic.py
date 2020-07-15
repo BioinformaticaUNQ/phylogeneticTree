@@ -8,11 +8,12 @@ from alignSequences import execute_aligned
 def execute_phylogenetic_tree(fileName, bootstrap):
     fasta = Fasta(fileName)
     time = datetime.now().strftime("%Y-%b-%d_%H-%M-%S")
+    outputFile = f"{time}_aligned_{fileName}"
     if fasta.is_aligned():
-        shutil.copy(fileName, f'{time}_aligned_{fileName}')
+        shutil.copy(fileName, outputFile)
     else:
-        execute_aligned(fileName, f'{time}_aligned_{fileName}')
-    generate_phylogenetic_tree(f'{time}_aligned_{fileName}', bootstrap)
+        execute_aligned(fileName, outputFile)
+    generate_phylogenetic_tree(outputFile, bootstrap)
 
 
 def generate_phylogenetic_tree(fileName, bootstrap):
