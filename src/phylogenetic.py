@@ -11,9 +11,10 @@ def execute_phylogenetic_tree(fileName, bootstrap):
     if fasta.is_aligned():
         shutil.copy(fileName, f'{time}_aligned_{fileName}')
     else:
-        execute_aligned(fileName)
+        execute_aligned(fileName, f'{time}_aligned_{fileName}')
     generate_phylogenetic_tree(f'{time}_aligned_{fileName}', bootstrap)
 
 
 def generate_phylogenetic_tree(fileName, bootstrap):
     subprocess.call(f"iqtree -s ./{fileName} -bb {bootstrap}", shell=True)
+    print("Done!")
