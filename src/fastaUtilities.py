@@ -1,4 +1,5 @@
 import re
+from exception import ModelException
 
 validCharacters = re.compile("([ABCDEFGHIKLMNOPQRSTUVWXYZ\\-\\*]+)")
 
@@ -29,15 +30,21 @@ class Fasta:
             if validCharacters.match(seq).group(1) != seq:
                 errors.append(header)                
         if errors:
-            raise Exception(f"Sequences not valid: {errors}")
+            raise ModelException(f"Sequences not valid: {errors}")
 
     def _check_sequences_for_same_type(self):
-        print("I dont know how T_T")
-        self.seqType = None
+        numberOfUniqueCharacters = [len(set(seq)) for seq in self.content.items()]
+        if all(characters >= 4 for characters in numberOfUniqueCharacters):
+            self.seqType = "PROTEIN"
+            return
+        if all(characters <= 4 for characters in numberOfUniqueCharacters):
+            self.seqType = "DNA"
+            return
+        raise ModelException("Sequences with different type")
 
     def _check_has_sequences(self):
         if not self.content:
-            raise Exception(f"Not found sequences")
+            raise ModelException(f"Not found sequences")
 
     def _check_alignment(self):
         length = None
