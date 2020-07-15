@@ -7,7 +7,7 @@
 ## Como se usa
 
 * Poner archivo Fasta (alineado o no) en la carpeta data
-* Ejecutar `./phylogeneticTree.sh --name {nombreDelArchivoFasta} --bootstrap {numero}`
+* Ejecutar `./phylogeneticTree.sh -f {nombreDelArchivoFasta} -b {numero}`
 * Al terminar dentro de la carpeta data se encontrara una carpeta `output` con el `.treefile` y el log de iqtree.
 * Ir a la pagina https://hurrell-y-mottesi.github.io/phylogenetic-map
 * cargar el archivo `.treefile` y un archivo de locación con el siguiente formato:
